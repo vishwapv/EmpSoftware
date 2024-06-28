@@ -14,7 +14,11 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
+import LoginPage from 'containers/LoginPage/Loadable';
+import Dashboard from 'containers/Dashboard/Loadable';
+import Form from 'containers/Form/Loadable';
+import Details from 'containers/Details/Loadable';
+import EmpEdit from 'containers/EmpEdit/Loadable';
 import Footer from 'components/Footer';
 
 import GlobalStyle from '../../global-styles';
@@ -30,21 +34,15 @@ const AppWrapper = styled.div`
 
 export default function App() {
   return (
-    <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
-        <Route path="" component={NotFoundPage} />
-      </Switch>
-      <Footer />
-      <GlobalStyle />
-    </AppWrapper>
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/features" component={FeaturePage} />
+      <Route path="/loginpage" component={LoginPage} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/form" component={Form} />
+      <Route path="/details" component={Details} />
+      <Route path="/empedit" component={EmpEdit} />
+      <Route path="" component={NotFoundPage} />
+    </Switch>
   );
 }
