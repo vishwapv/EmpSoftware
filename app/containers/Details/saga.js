@@ -35,8 +35,9 @@ export function* formSagaTableWorking(payload) {
     yield put(formError(err && err.response && err.res));
   }
 }
+
 // Individual exports for testing
-export default function* loginPageSaga() {
+export default function* detailsSaga() {
   // See example in containers/HomePage/saga.js
   yield takeLatest(FORM_REQUEST, formSagaTableWorking);
 }

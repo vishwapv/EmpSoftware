@@ -15,6 +15,10 @@ import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
+import Dashboard from 'containers/Dashboard/Loadable';
+import Form from 'containers/Form/Loadable';
+import Details from 'containers/Details/Loadable';
+import EmpEdit from 'containers/EmpEdit/Loadable';
 import Footer from 'components/Footer';
 
 import GlobalStyle from '../../global-styles';
@@ -34,6 +38,10 @@ export default function App() {
       <Route exact path="/" component={HomePage} />
       <Route path="/features" component={FeaturePage} />
       <Route path="/loginpage" component={LoginPage} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/form" component={Form} />
+      <Route path="/details" component={Details} />
+      <Route path="/empedit" component={EmpEdit} />
       <Route path="" component={NotFoundPage} />
     </Switch>
   );

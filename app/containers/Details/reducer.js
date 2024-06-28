@@ -1,9 +1,10 @@
 /*
  *
- * LoginPage reducer
+ * Details reducer
  *
  */
 import produce from 'immer';
+
 import {
   DEFAULT_ACTION,
   FORM_REQUEST,
@@ -19,7 +20,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const loginPageReducer = (state = initialState, action) =>
+const detailsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
@@ -40,4 +41,4 @@ const loginPageReducer = (state = initialState, action) =>
     }
   });
 
-export default loginPageReducer;
+export default detailsReducer;

@@ -5,6 +5,10 @@ import request from '../../utils/request';
 import { takeLatest, all, call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
+// function formSagacall(payload) {
+//   return request('get', `https://jsonplaceholder.typicode.com/posts`);
+// }
+
 function formSagacall(payload) {
   console.log('response', payload);
 
@@ -36,7 +40,7 @@ export function* formSagaTableWorking(payload) {
   }
 }
 // Individual exports for testing
-export default function* loginPageSaga() {
+export default function* formSaga() {
   // See example in containers/HomePage/saga.js
   yield takeLatest(FORM_REQUEST, formSagaTableWorking);
 }

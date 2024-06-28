@@ -1,6 +1,6 @@
 /**
  *
- * LoginPage
+ * EmpEdit
  *
  */
 
@@ -14,7 +14,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
+import makeSelectEmpEdit from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -26,11 +26,29 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+// import TextField from '@material-ui/core/TextField';
+
 import TextField from '@material-ui/core/TextField';
 
-import './login.css';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
+import Checkbox from '@material-ui/core/Checkbox';
+
+import IconButton from '@material-ui/core/IconButton';
+
+import './styles.css';
 
 import { formRequest } from './actions';
+
+import Buttons from '../../components/Buttons';
 
 const useStyles = makeStyles({
   root: {
@@ -66,9 +84,40 @@ const useStyles1 = makeStyles(theme => ({
   },
 }));
 
-export function LoginPage({ formRes, onFormData }) {
-  useInjectReducer({ key: 'loginPage', reducer });
-  useInjectSaga({ key: 'loginPage', saga });
+const useStyles2 = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
+
+const useStyles3 = makeStyles(theme => ({
+  button: {
+    display: 'block',
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
+
+const useStyles4 = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: 'none',
+  },
+}));
+
+export function Form({ formRes, onFormData }) {
+  useInjectReducer({ key: 'form', reducer });
+  useInjectSaga({ key: 'form', saga });
 
   useEffect(() => {
     onFormData('Mahesh');
@@ -84,49 +133,70 @@ export function LoginPage({ formRes, onFormData }) {
 
   const classes1 = useStyles1();
 
+  const classes2 = useStyles2();
+
+  const classes3 = useStyles3();
+
+  const classes4 = useStyles4();
+
   const [formData, setFormData] = useState({
-    userName: '',
-    password: '',
+    username: '',
+    email: '',
+    mobileno: '',
   });
+
   const [userData, setUserData] = useState('');
 
   const handleChange = e => {
     const { id, value } = e.target;
+    // const a = e.target.value;
+    // console.log('Entering form data :', a);
     setFormData(prevFormData => ({
       ...prevFormData,
       [id]: value,
     }));
   };
+
   const handleSubmit = e => {
     e.preventDefault();
     setUserData(formData);
-    // You can also add any additional logic to handle the form submission here
-    console.log('Form Data Submitted:', formData);
+    console.log(e);
+    console.log('Final data :', userData);
+    console.log('clicked on form', formData);
   };
 
   return (
     <div className="container">
-      {/* <h3>Login Page</h3> */}
+      <Buttons />
+      <h3>Employee List</h3>
       <Card className={classes.root} variant="outlined">
         <div className="form-container">
-          <form className="form-body" onSubmit={handleSubmit}>
+          <form
+            className="form-body"
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit}
+          >
             <TextField
-              id="userName"
-              label="User Name"
-              value={formData.userName}
+              id="username"
+              label="Name"
+              value={formData.username}
               onChange={handleChange}
             />
             <TextField
-              id="password"
-              label="Password"
-              type="password"
-              value={formData.password}
+              id="email"
+              label="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <TextField
+              id="mobileno"
+              label="Mobile no."
+              value={formData.mobileno}
               onChange={handleChange}
             />
             <div className="btn">
-              <Button variant="contained" color="primary" type="submit" on>
-                Login
-              </Button>
+              <button type="submit">Update</button>
             </div>
           </form>
         </div>
@@ -135,14 +205,14 @@ export function LoginPage({ formRes, onFormData }) {
   );
 }
 
-LoginPage.propTypes = {
+Form.propTypes = {
   dispatch: PropTypes.func.isRequired,
   formRes: PropTypes.func,
   onFormData: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginPage: makeSelectLoginPage(),
+  empEdit: makeSelectEmpEdit(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -163,4 +233,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(LoginPage);
+)(Form);

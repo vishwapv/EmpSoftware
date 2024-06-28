@@ -57,7 +57,7 @@ export function HomePage({
     repos,
   };
 
-  return <div>Hello</div>;
+  return <div>Hello Homepage</div>;
 }
 
 HomePage.propTypes = {

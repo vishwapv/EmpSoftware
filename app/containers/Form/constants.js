@@ -1,6 +1,6 @@
 /*
  *
- * LoginPage constants
+ * Form constants
  *
  */
 

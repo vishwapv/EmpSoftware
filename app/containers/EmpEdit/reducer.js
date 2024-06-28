@@ -1,6 +1,6 @@
 /*
  *
- * LoginPage reducer
+ * EmpEdit reducer
  *
  */
 import produce from 'immer';
@@ -19,7 +19,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const loginPageReducer = (state = initialState, action) =>
+const empEditReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
@@ -40,4 +40,4 @@ const loginPageReducer = (state = initialState, action) =>
     }
   });
 
-export default loginPageReducer;
+export default empEditReducer;
