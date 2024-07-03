@@ -14,8 +14,8 @@ function formSagacall(payload) {
   }
 
   return axios({
-    method: 'get', // Correctly specify the method as 'get'
-    url: 'https://jsonplaceholder.typicode.com/posts',
+    method: 'put', // Correctly specify the method as 'get'
+    url: 'http://localhost:4000/api/v0/formData/userUpdate',
     data: payload, // Pass payload as query parameters
   });
 

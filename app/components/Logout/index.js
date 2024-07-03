@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import { browserRedirect } from '../../helpers/helpers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,13 +24,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Logout() {
+  //  localStorage.removeItem('user');
+  //  localStorage.removeItem('token');
+  //  localStorage.clear();
+
+  const handleChange = () =>{
+    console.log("Clicked on logout")
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.clear();
+    browserRedirect('/sessions');
+  
+  }
   const classes = useStyles();
   return (
-    <div className="container">
+
       <div className={classes.root}>
-        <Button>Logout</Button>
-      </div>
+        <Button onClick={handleChange}>Logout</Button>
     </div>
+      
   );
 }
 

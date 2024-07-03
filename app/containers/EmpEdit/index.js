@@ -44,6 +44,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import IconButton from '@material-ui/core/IconButton';
 
+import Logout from '../../components/Logout';
+import HomeButton from '../../components/HomeButton';
+import EmpDetails from '../../components/EmpDetails';
+import UpdateButton from '../../components/UpdateButton';
+import AddDetails from '../../components/AddDetails'
+
 import './styles.css';
 
 import { formRequest } from './actions';
@@ -119,14 +125,14 @@ export function Form({ formRes, onFormData }) {
   useInjectReducer({ key: 'form', reducer });
   useInjectSaga({ key: 'form', saga });
 
-  useEffect(() => {
-    onFormData('Mahesh');
-  }, [onFormData]);
+  // useEffect(() => {
+  //   onFormData('Mahesh');
+  // }, [onFormData]);
 
-  useEffect(() => {
-    // Wrap the payload in an object
-    onFormData({ query: 'Vishwas' });
-  }, []);
+  // useEffect(() => {
+  //   // Wrap the payload in an object
+  //   onFormData({ query: 'Vishwas' });
+  // }, []);
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -141,33 +147,88 @@ export function Form({ formRes, onFormData }) {
 
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
-    mobileno: '',
+    update: {
+        $set: {
+            email: "",
+            mobileno: ""
+        }
+    }
   });
 
   const [userData, setUserData] = useState('');
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { id, value } = e.target;
-    // const a = e.target.value;
-    // console.log('Entering form data :', a);
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      [id]: value,
-    }));
+
+    if (id === 'username') {
+      setFormData(prevState => ({
+        ...prevState,
+        [id]: value
+      }));
+    } else {
+      setFormData(prevState => ({
+        ...prevState,
+        update: {
+          $set: {
+            ...prevState.update.$set,
+            [id]: value
+          }
+        }
+      }));
+    }
   };
 
+  //  const handleChange = (e) => {
+  //   const { id, value } = e.target;
+  //   console.log('Event Target ID:', id);
+  //   console.log('Event Target Value:', value);
+
+  //   if (id === 'username') {
+  //     setFormData(prevState => {
+  //       const newState = {
+  //         ...prevState,
+  //         [id]: value
+  //       };
+  //       console.log('New State for Username:', newState);
+  //       return newState;
+  //     });
+  //   } else {
+  //     setFormData(prevState => {
+  //       const newState = {
+  //         ...prevState,
+  //         update: {
+  //           $set: {
+  //             ...prevState.update.$set,
+  //             [id]: value
+  //           }
+  //         }
+  //       };
+  //       console.log('New State for Update:', newState);
+  //       return newState;
+  //     });
+  //   }
+  // };
   const handleSubmit = e => {
     e.preventDefault();
     setUserData(formData);
+    onFormData(formData)
     console.log(e);
     console.log('Final data :', userData);
     console.log('clicked on form', formData);
   };
 
   return (
+    <>
+    
+    <div className='btn-container'>
+      <Logout />
+      <HomeButton />
+      <EmpDetails />
+      <AddDetails/>
+      <UpdateButton />
+
+    </div>
     <div className="container">
-      <Buttons />
       <h3>Employee List</h3>
       <Card className={classes.root} variant="outlined">
         <div className="form-container">
@@ -186,13 +247,13 @@ export function Form({ formRes, onFormData }) {
             <TextField
               id="email"
               label="Email"
-              value={formData.email}
+              value={formData.update.$set.email}
               onChange={handleChange}
             />
             <TextField
               id="mobileno"
               label="Mobile no."
-              value={formData.mobileno}
+              value={formData.update.$set.mobileno}
               onChange={handleChange}
             />
             <div className="btn">
@@ -202,6 +263,7 @@ export function Form({ formRes, onFormData }) {
         </div>
       </Card>
     </div>
+    </>
   );
 }
 

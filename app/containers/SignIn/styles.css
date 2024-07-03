@@ -1,31 +1,25 @@
 .container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-
-.form-container {
+.form-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.form-body {
+.form-body{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
 }
 
 .btn{
     display: flex;
     gap: 2rem;
-}
-.btn-container{
-    display: flex;
-    
+    padding: 20px;
 }

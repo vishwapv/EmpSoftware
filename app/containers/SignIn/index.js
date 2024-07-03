@@ -1,6 +1,6 @@
 /**
  *
- * LoginPage
+ * SignIn
  *
  */
 
@@ -14,10 +14,11 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
+import {makeSelectSignInData} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import { formRequest } from './actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -25,12 +26,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 import TextField from '@material-ui/core/TextField';
 
-import './login.css';
-
-import { formRequest } from './actions';
+import './styles.css';
 
 const useStyles = makeStyles({
   root: {
@@ -66,9 +64,12 @@ const useStyles1 = makeStyles(theme => ({
   },
 }));
 
-export function LoginPage({ formRes, onFormData }) {
-  useInjectReducer({ key: 'loginPage', reducer });
-  useInjectSaga({ key: 'loginPage', saga });
+export function SignIn({
+  signIn,
+  onFormData
+}) {
+  useInjectReducer({ key: 'signIn', reducer });
+  useInjectSaga({ key: 'signIn', saga });
 
   // useEffect(() => {
   //   onFormData('Mahesh');
@@ -76,8 +77,9 @@ export function LoginPage({ formRes, onFormData }) {
 
   // useEffect(() => {
   //   // Wrap the payload in an object
-  //   onFormData({ query: 'Vishwas' });
-  // }, []);
+  //   console.log("Calling data by props")
+  // }, [signIn]);
+
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -99,7 +101,9 @@ export function LoginPage({ formRes, onFormData }) {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    setUserData(formData);
+    console.log("clicked")
+    onFormData(formData)
+    // setUserData(formData);
     // You can also add any additional logic to handle the form submission here
     console.log('Form Data Submitted:', formData);
   };
@@ -135,14 +139,14 @@ export function LoginPage({ formRes, onFormData }) {
   );
 }
 
-LoginPage.propTypes = {
+SignIn.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  formRes: PropTypes.func,
   onFormData: PropTypes.func,
+  signIn: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginPage: makeSelectLoginPage(),
+  signIn: makeSelectSignInData(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -163,4 +167,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(LoginPage);
+)(SignIn);

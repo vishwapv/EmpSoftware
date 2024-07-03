@@ -9,13 +9,13 @@ function formSagacall(payload) {
   console.log('response', payload);
 
   // Ensure payload is an object
-  if (typeof payload !== 'object') {
-    throw new Error('Payload must be an object');
-  }
+  // if (typeof payload !== 'object') {
+  //   throw new Error('Payload must be an object');
+  // }
 
   return axios({
     method: 'get', // Correctly specify the method as 'get'
-    url: 'https://jsonplaceholder.typicode.com/posts',
+    url: 'http://localhost:4000/api/v0/formData/getData',
     data: payload, // Pass payload as query parameters
   });
 
@@ -27,9 +27,12 @@ export function* formSagaTableWorking(payload) {
   console.log('fetch table details saga works', payload);
 
   try {
-    let response = yield call(formSagacall, payload && payload.payload);
-    console.log('fetching table details saga response ', response);
-    yield put(formSuccess(response && response.data));
+    let response = yield call(formSagacall, payload && payload.data);
+    console.log('fetching table details saga response ', response); 
+    const formDataArray = response && response.data && response.data.user && response.data.user.FormData;
+    // yield put(formSuccess(response && response.data));
+    yield put(formSuccess(formDataArray));
+    console.log("data from the backend",formSuccess(response))
   } catch (err) {
     console.log('fetching table error details', err);
     yield put(formError(err && err.response && err.res));

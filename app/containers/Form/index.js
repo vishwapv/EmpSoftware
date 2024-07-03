@@ -50,6 +50,10 @@ import './form.css';
 import { formRequest } from './actions';
 
 import Logout from '../../components/Logout';
+import HomeButton from '../../components/HomeButton';
+import EmpDetails from '../../components/EmpDetails';
+import UpdateButton from '../../components/UpdateButton';
+import AddDetails from '../../components/AddDetails'
 
 const useStyles = makeStyles({
   root: {
@@ -120,14 +124,14 @@ export function Form({ formRes, onFormData }) {
   useInjectReducer({ key: 'form', reducer });
   useInjectSaga({ key: 'form', saga });
 
-  useEffect(() => {
-    onFormData('Mahesh');
-  }, [onFormData]);
+  // useEffect(() => {
+  //   onFormData('Mahesh');
+  // }, [onFormData]);
 
-  useEffect(() => {
-    // Wrap the payload in an object
-    onFormData({ query: 'Vishwas' });
-  }, []);
+  // useEffect(() => {
+  //   // Wrap the payload in an object
+  //   onFormData(formData);
+  // }, []);
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -160,6 +164,7 @@ export function Form({ formRes, onFormData }) {
   const handleSubmit = e => {
     e.preventDefault();
     setUserData(formData);
+    onFormData(formData);
     console.log(e);
     console.log('Final data :', userData);
     console.log('clicked on form', formData);
@@ -172,6 +177,14 @@ export function Form({ formRes, onFormData }) {
 
   return (
     <>
+      <div className='btn-container'>
+        <Logout />
+        <HomeButton />
+        <EmpDetails />
+        <AddDetails />
+        <UpdateButton />
+
+      </div>
       <div className="container">
         <h3>Create Employee</h3>
         <Card className={classes.root} variant="outlined">

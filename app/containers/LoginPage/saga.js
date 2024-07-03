@@ -17,7 +17,17 @@ function formSagacall(payload) {
     method: 'get', // Correctly specify the method as 'get'
     url: 'https://jsonplaceholder.typicode.com/posts',
     data: payload, // Pass payload as query parameters
-  });
+  }).then(response => {
+                localStorage.setItem("token", response.data.data);
+                browserRedirect('/');
+            })
+            .catch(error => {
+                console.log(error);
+                console.log(error.response);
+                if (error.response.data.e) {
+                    toast.error(error.response.data.e);
+                }
+            })
 
   return request('get', `https://jsonplaceholder.typicode.com/posts`);
 }
