@@ -20,6 +20,11 @@ import saga from './saga';
 import messages from './messages';
 
 import Buttons from '../../components/Buttons';
+import Logout from '../../components/Logout';
+import HomeButton from '../../components/HomeButton';
+import EmpDetails from '../../components/EmpDetails';
+import UpdateButton from '../../components/UpdateButton';
+import AddDetails from '../../components/AddDetails';
 
 import './styles.css';
 
@@ -29,7 +34,14 @@ export function Dashboard() {
 
   return (
     <>
-      <Buttons />
+      <div className="btn-container">
+        <Logout />
+        <HomeButton />
+        <EmpDetails />
+        <AddDetails />
+        <UpdateButton />
+      </div>
+
       <div>
         <h3>DashBord</h3>
       </div>

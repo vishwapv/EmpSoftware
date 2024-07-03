@@ -12,7 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -21,16 +21,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import { alpha } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectDetails from './selectors';
@@ -38,145 +28,113 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-import './styles.css';
+import './Details.css';
 import { formRequest } from './actions';
 import { Form } from '../Form';
 
+import Logout from '../../components/Logout';
+import HomeButton from '../../components/HomeButton';
+import EmpDetails from '../../components/EmpDetails';
+import UpdateButton from '../../components/UpdateButton';
+import AddDetails from '../../components/AddDetails';
+
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
+// const rows = [
+//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+//   createData('Eclair', 262, 16.0, 24, 6.0),
+//   createData('Cupcake', 305, 3.7, 67, 4.3),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9),
+// ];
+
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 700,
   },
 });
-
-const useStyles1 = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
-export function Details({ formRes, onFormData }) {
+export function Details({ details, onFormData }) {
   useInjectReducer({ key: 'details', reducer });
   useInjectSaga({ key: 'details', saga });
 
-  //   useEffect(() => {
-  //     onFormData('Mahesh');
-  //   }, [onFormData]);
-
-  useEffect(() => {
-    onFormData({ query: 'Vishwas' });
-  }, []);
-
   const classes = useStyles();
 
-  const classes1 = useStyles1();
+  useEffect(() => {
+    onFormData('Mahesh');
+  }, []);
+
+  useEffect(() => {
+    console.log('calling data by props', details.formResponse);
+  }, [details.formResponse]);
 
   return (
-    <div className="container">
-      <Card className={classes.root} variant="outlined">
-        <AppBar position="static">
-          <Toolbar>
-            <div className>
-              <div className />
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-          </Toolbar>
-        </AppBar>
-        <TableContainer>
-          <Table aria-label="simple table">
+    <>
+      <div className="btn-container">
+        <Logout />
+        <HomeButton />
+        <EmpDetails />
+        <AddDetails />
+        <UpdateButton />
+      </div>
+      <div className="container">
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <TableCell>Unique ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Mobile No.</TableCell>
-                <TableCell>Designation</TableCell>
-                <TableCell>Gender</TableCell>
-                <TableCell>Course</TableCell>
-                <TableCell>Create Date</TableCell>
-                <TableCell>Action</TableCell>
+                <StyledTableCell align="center">Sl no</StyledTableCell>
+                <StyledTableCell align="right">UserName</StyledTableCell>
+                <StyledTableCell align="right">Email</StyledTableCell>
+                <StyledTableCell align="right">Mobile Number</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
-              </TableRow>
+              {details.formResponse &&
+                details.formResponse.map((row, index) => (
+                  <StyledTableRow key={index + 1}>
+                    <StyledTableCell align="center">
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {row.username}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.mobileno}
+                    </StyledTableCell>
+                    {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
+                  </StyledTableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
-      </Card>
-    </div>
+      </div>
+    </>
   );
 }
 
 Form.prototype = {
   dispatch: PropTypes.func.isRequired,
-  formRes: PropTypes.func,
-  onFormData: PropTypes.array,
+  onFormData: PropTypes.func,
+  details: PropTypes.array,
 };
 
 // Details.propTypes = {

@@ -19,7 +19,10 @@ import Dashboard from 'containers/Dashboard/Loadable';
 import Form from 'containers/Form/Loadable';
 import Details from 'containers/Details/Loadable';
 import EmpEdit from 'containers/EmpEdit/Loadable';
+import SignIn from 'containers/SignIn/Loadable';
 import Footer from 'components/Footer';
+import AuthRoute from '../../helpers/authRoutes';
+import PrivateRoute from '../../helpers/privateRoutes';
 
 import GlobalStyle from '../../global-styles';
 
@@ -28,21 +31,35 @@ const AppWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   min-height: 100%;
-  padding: 0 16px;
   flex-direction: column;
 `;
 
 export default function App() {
   return (
-    <Switch>
+    <AppWrapper>
+      <Switch>
+        <AuthRoute exact path="/sessions" component={SignIn} />
+
+        <Route path="/features" component={FeaturePage} />
+
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/form" component={Form} />
+        <Route path="/details" component={Details} />
+        <Route path="/empedit" component={EmpEdit} />
+        {/* <Route path="" component={NotFoundPage} /> */}
+
+        {/* <Route exact path="/sessions" component={SignIn} />
+       <Route path="/loginpage" component={LoginPage} />
       <Route exact path="/" component={HomePage} />
       <Route path="/features" component={FeaturePage} />
-      <Route path="/loginpage" component={LoginPage} />
+     
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/form" component={Form} />
       <Route path="/details" component={Details} />
       <Route path="/empedit" component={EmpEdit} />
-      <Route path="" component={NotFoundPage} />
-    </Switch>
+      <Route path="/signin" component={SignIn} />
+      <Route path="" component={NotFoundPage} /> */}
+      </Switch>
+    </AppWrapper>
   );
 }

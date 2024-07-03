@@ -14,10 +14,6 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectEmpEdit from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -43,6 +39,16 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import IconButton from '@material-ui/core/IconButton';
+import messages from './messages';
+import saga from './saga';
+import reducer from './reducer';
+import makeSelectEmpEdit from './selectors';
+
+import Logout from '../../components/Logout';
+import HomeButton from '../../components/HomeButton';
+import EmpDetails from '../../components/EmpDetails';
+import UpdateButton from '../../components/UpdateButton';
+import AddDetails from '../../components/AddDetails';
 
 import './styles.css';
 
@@ -119,14 +125,14 @@ export function Form({ formRes, onFormData }) {
   useInjectReducer({ key: 'form', reducer });
   useInjectSaga({ key: 'form', saga });
 
-  useEffect(() => {
-    onFormData('Mahesh');
-  }, [onFormData]);
+  // useEffect(() => {
+  //   onFormData('Mahesh');
+  // }, [onFormData]);
 
-  useEffect(() => {
-    // Wrap the payload in an object
-    onFormData({ query: 'Vishwas' });
-  }, []);
+  // useEffect(() => {
+  //   // Wrap the payload in an object
+  //   onFormData({ query: 'Vishwas' });
+  // }, []);
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -141,67 +147,121 @@ export function Form({ formRes, onFormData }) {
 
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
-    mobileno: '',
+    update: {
+      $set: {
+        email: '',
+        mobileno: '',
+      },
+    },
   });
 
   const [userData, setUserData] = useState('');
 
   const handleChange = e => {
     const { id, value } = e.target;
-    // const a = e.target.value;
-    // console.log('Entering form data :', a);
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      [id]: value,
-    }));
+
+    if (id === 'username') {
+      setFormData(prevState => ({
+        ...prevState,
+        [id]: value,
+      }));
+    } else {
+      setFormData(prevState => ({
+        ...prevState,
+        update: {
+          $set: {
+            ...prevState.update.$set,
+            [id]: value,
+          },
+        },
+      }));
+    }
   };
 
+  //  const handleChange = (e) => {
+  //   const { id, value } = e.target;
+  //   console.log('Event Target ID:', id);
+  //   console.log('Event Target Value:', value);
+
+  //   if (id === 'username') {
+  //     setFormData(prevState => {
+  //       const newState = {
+  //         ...prevState,
+  //         [id]: value
+  //       };
+  //       console.log('New State for Username:', newState);
+  //       return newState;
+  //     });
+  //   } else {
+  //     setFormData(prevState => {
+  //       const newState = {
+  //         ...prevState,
+  //         update: {
+  //           $set: {
+  //             ...prevState.update.$set,
+  //             [id]: value
+  //           }
+  //         }
+  //       };
+  //       console.log('New State for Update:', newState);
+  //       return newState;
+  //     });
+  //   }
+  // };
   const handleSubmit = e => {
     e.preventDefault();
     setUserData(formData);
+    onFormData(formData);
     console.log(e);
     console.log('Final data :', userData);
     console.log('clicked on form', formData);
   };
 
   return (
-    <div className="container">
-      <Buttons />
-      <h3>Employee List</h3>
-      <Card className={classes.root} variant="outlined">
-        <div className="form-container">
-          <form
-            className="form-body"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
-          >
-            <TextField
-              id="username"
-              label="Name"
-              value={formData.username}
-              onChange={handleChange}
-            />
-            <TextField
-              id="email"
-              label="Email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <TextField
-              id="mobileno"
-              label="Mobile no."
-              value={formData.mobileno}
-              onChange={handleChange}
-            />
-            <div className="btn">
-              <button type="submit">Update</button>
-            </div>
-          </form>
-        </div>
-      </Card>
-    </div>
+    <>
+      <div className="btn-container">
+        <Logout />
+        <HomeButton />
+        <EmpDetails />
+        <AddDetails />
+        <UpdateButton />
+      </div>
+      <div className="container">
+        <h3>Employee List</h3>
+        <Card className={classes.root} variant="outlined">
+          <div className="form-container">
+            <form
+              className="form-body"
+              noValidate
+              autoComplete="off"
+              onSubmit={handleSubmit}
+            >
+              <TextField
+                id="username"
+                label="Name"
+                value={formData.username}
+                onChange={handleChange}
+              />
+              <TextField
+                id="email"
+                label="Email"
+                value={formData.update.$set.email}
+                onChange={handleChange}
+              />
+              <TextField
+                id="mobileno"
+                label="Mobile no."
+                value={formData.update.$set.mobileno}
+                onChange={handleChange}
+              />
+              <div className="btn">
+                <button type="submit">Update</button>
+              </div>
+            </form>
+          </div>
+        </Card>
+      </div>
+    </>
   );
 }
 
