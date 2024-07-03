@@ -14,11 +14,6 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import {makeSelectSignInData} from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
-import { formRequest } from './actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -27,6 +22,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import { formRequest } from './actions';
+import messages from './messages';
+import saga from './saga';
+import reducer from './reducer';
+import { makeSelectSignInData } from './selectors';
 
 import './styles.css';
 
@@ -64,10 +64,7 @@ const useStyles1 = makeStyles(theme => ({
   },
 }));
 
-export function SignIn({
-  signIn,
-  onFormData
-}) {
+export function SignIn({ signIn, onFormData }) {
   useInjectReducer({ key: 'signIn', reducer });
   useInjectSaga({ key: 'signIn', saga });
 
@@ -79,7 +76,6 @@ export function SignIn({
   //   // Wrap the payload in an object
   //   console.log("Calling data by props")
   // }, [signIn]);
-
 
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -101,8 +97,8 @@ export function SignIn({
   };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("clicked")
-    onFormData(formData)
+    console.log('clicked');
+    onFormData(formData);
     // setUserData(formData);
     // You can also add any additional logic to handle the form submission here
     console.log('Form Data Submitted:', formData);

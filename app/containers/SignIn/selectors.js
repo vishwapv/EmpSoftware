@@ -20,11 +20,11 @@ const makeSelectSignIn = () =>
     selectSignInDomain,
     substate => substate,
   );
-  const makeSelectSignInData = () =>
-    createSelector(
-      selectSignInDomain,
-      substate => substate.formResponse
-    );
+const makeSelectSignInData = () =>
+  createSelector(
+    selectSignInDomain,
+    substate => substate.formResponse,
+  );
 
 export default makeSelectSignIn;
-export { selectSignInDomain,makeSelectSignInData };
+export { selectSignInDomain, makeSelectSignInData };

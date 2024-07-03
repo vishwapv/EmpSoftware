@@ -18,14 +18,13 @@ export const initialState = {
   formResponse: {},
 };
 
-
 /* eslint-disable default-case, no-param-reassign */
 const signInReducer = (state = initialState, action) =>
-  produce(state, (draft ) => {
+  produce(state, draft => {
     switch (action.type) {
       case DEFAULT_ACTION:
         break;
-        case FORM_REQUEST:
+      case FORM_REQUEST:
         draft.loading = true;
         break;
       case FORM_SUCCESS:

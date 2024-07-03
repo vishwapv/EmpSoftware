@@ -10,8 +10,8 @@ const AuthRoute = ({ component: Component, redirect: pathname, ...rest }) => {
       return (
         <Route
           {...rest}
-          render={props =>
-            <Component {...rest} {...props} />
+          render={
+            props => <Component {...rest} {...props} />
             // (
             //   <div className="authLayout">
             //     {/* <NoInternetBar /> */}

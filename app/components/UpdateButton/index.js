@@ -9,10 +9,10 @@ import React, { memo } from 'react';
 // import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import { browserRedirect } from '../../helpers/helpers';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import messages from './messages';
+import { browserRedirect } from '../../helpers/helpers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,17 +23,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function UpdateButton() {
-
-  const handleChange = () =>{
-    console.log("clicked on update button")
+  const handleChange = () => {
+    console.log('clicked on update button');
     browserRedirect('/empedit');
-  
-  }
+  };
   const classes = useStyles();
   return (
     <div className={classes.root}>
-    <Button onClick={handleChange}>Update Details</Button>
-  </div>
+      <Button onClick={handleChange}>Update Details</Button>
+    </div>
   );
 }
 

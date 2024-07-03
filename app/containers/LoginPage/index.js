@@ -14,10 +14,6 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -27,6 +23,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import TextField from '@material-ui/core/TextField';
+import messages from './messages';
+import saga from './saga';
+import reducer from './reducer';
+import makeSelectLoginPage from './selectors';
 
 import './login.css';
 

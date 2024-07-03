@@ -1,9 +1,9 @@
 // import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, all, call, put, select } from 'redux-saga/effects';
+import axios from 'axios';
 import { FORM_REQUEST } from './constants';
 import { formSuccess, formError } from './actions';
 import request from '../../utils/request';
-import { takeLatest, all, call, put, select } from 'redux-saga/effects';
-import axios from 'axios';
 
 function formSagacall(payload) {
   console.log('response', payload);
@@ -27,12 +27,16 @@ export function* formSagaTableWorking(payload) {
   console.log('fetch table details saga works', payload);
 
   try {
-    let response = yield call(formSagacall, payload && payload.data);
-    console.log('fetching table details saga response ', response); 
-    const formDataArray = response && response.data && response.data.user && response.data.user.FormData;
+    const response = yield call(formSagacall, payload && payload.data);
+    console.log('fetching table details saga response ', response);
+    const formDataArray =
+      response &&
+      response.data &&
+      response.data.user &&
+      response.data.user.FormData;
     // yield put(formSuccess(response && response.data));
     yield put(formSuccess(formDataArray));
-    console.log("data from the backend",formSuccess(response))
+    console.log('data from the backend', formSuccess(response));
   } catch (err) {
     console.log('fetching table error details', err);
     yield put(formError(err && err.response && err.res));

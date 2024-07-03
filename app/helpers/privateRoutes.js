@@ -15,8 +15,8 @@ const PrivateRoute = ({
       return (
         <Route
           {...rest}
-          render={props =>
-            <Component {...rest} {...props} />
+          render={
+            props => <Component {...rest} {...props} />
 
             // (
             //   <div className="authLayout">

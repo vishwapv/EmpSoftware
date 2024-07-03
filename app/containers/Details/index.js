@@ -36,9 +36,9 @@ import Logout from '../../components/Logout';
 import HomeButton from '../../components/HomeButton';
 import EmpDetails from '../../components/EmpDetails';
 import UpdateButton from '../../components/UpdateButton';
-import AddDetails from '../../components/AddDetails'
+import AddDetails from '../../components/AddDetails';
 
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -48,7 +48,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(theme => ({
   root: {
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
@@ -67,66 +67,66 @@ const StyledTableRow = withStyles((theme) => ({
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
 });
-export function Details({details, onFormData}) {
+export function Details({ details, onFormData }) {
   useInjectReducer({ key: 'details', reducer });
   useInjectSaga({ key: 'details', saga });
 
   const classes = useStyles();
 
-
-    useEffect(() => {
-      onFormData('Mahesh');
-    }, []);
+  useEffect(() => {
+    onFormData('Mahesh');
+  }, []);
 
   useEffect(() => {
-    console.log( 'calling data by props',details.formResponse);
+    console.log('calling data by props', details.formResponse);
   }, [details.formResponse]);
 
   return (
     <>
-    <div className='btn-container'>
-      <Logout />
-      <HomeButton />
-      <EmpDetails />
-      <AddDetails/>
-      <UpdateButton />
-
-    </div>
-    <div className='container'>
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">Sl no</StyledTableCell>
-            <StyledTableCell align="right">UserName</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Mobile Number</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {details.formResponse && details.formResponse.map((row,index) => (
-            <StyledTableRow key={index + 1}>
-              <StyledTableCell align="center">{index + 1}</StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-              {row.username}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
-              <StyledTableCell align="right">{row.mobileno}</StyledTableCell>
-              {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    
-    </div>
+      <div className="btn-container">
+        <Logout />
+        <HomeButton />
+        <EmpDetails />
+        <AddDetails />
+        <UpdateButton />
+      </div>
+      <div className="container">
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">Sl no</StyledTableCell>
+                <StyledTableCell align="right">UserName</StyledTableCell>
+                <StyledTableCell align="right">Email</StyledTableCell>
+                <StyledTableCell align="right">Mobile Number</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {details.formResponse &&
+                details.formResponse.map((row, index) => (
+                  <StyledTableRow key={index + 1}>
+                    <StyledTableCell align="center">
+                      {index + 1}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {row.username}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.mobileno}
+                    </StyledTableCell>
+                    {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </>
   );
 }

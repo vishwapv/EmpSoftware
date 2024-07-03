@@ -1,9 +1,9 @@
 // import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, all, call, put, select } from 'redux-saga/effects';
+import axios from 'axios';
 import { FORM_REQUEST } from './constants';
 import { formSuccess, formError } from './actions';
 import request from '../../utils/request';
-import { takeLatest, all, call, put, select } from 'redux-saga/effects';
-import axios from 'axios';
 
 // function formSagacall(payload) {
 //   return request('get', `https://jsonplaceholder.typicode.com/posts`);
@@ -19,7 +19,7 @@ function formSagacall(payload) {
 
   return axios({
     method: 'post', // Correctly specify the method as 'get'
-    url: 'http://localhost:4000/api/v0/formData/register', //API
+    url: 'http://localhost:4000/api/v0/formData/register', // API
     data: payload, // Pass payload as query parameters
   });
 
@@ -31,7 +31,7 @@ export function* formSagaTableWorking(payload) {
   console.log('fetch table details saga works', payload);
 
   try {
-    let response = yield call(formSagacall, payload && payload.payload);
+    const response = yield call(formSagacall, payload && payload.payload);
     console.log('fetching table details saga response ', response);
     yield put(formSuccess(response && response.data));
   } catch (err) {

@@ -9,10 +9,10 @@ import React, { memo } from 'react';
 // import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import { browserRedirect } from '../../helpers/helpers';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import messages from './messages';
+import { browserRedirect } from '../../helpers/helpers';
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -22,14 +22,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function EmpDetails() {
-  const handleChange = () =>{
-    console.log("clicked on emp detials")
+  const handleChange = () => {
+    console.log('clicked on emp detials');
     browserRedirect('/details');
-  
-  }
+  };
   const classes = useStyles();
   return (
-    
     <div className={classes.root}>
       <Button onClick={handleChange}>Emp Details</Button>
     </div>

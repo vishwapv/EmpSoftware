@@ -16,7 +16,7 @@ export const initialState = {
   loading: false,
   success: false,
   error: false,
-  formResponse:[],
+  formResponse: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */

@@ -14,10 +14,6 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectFormData } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -43,6 +39,10 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import IconButton from '@material-ui/core/IconButton';
+import messages from './messages';
+import saga from './saga';
+import reducer from './reducer';
+import { makeSelectFormData } from './selectors';
 // import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 import './form.css';
@@ -53,7 +53,7 @@ import Logout from '../../components/Logout';
 import HomeButton from '../../components/HomeButton';
 import EmpDetails from '../../components/EmpDetails';
 import UpdateButton from '../../components/UpdateButton';
-import AddDetails from '../../components/AddDetails'
+import AddDetails from '../../components/AddDetails';
 
 const useStyles = makeStyles({
   root: {
@@ -177,13 +177,12 @@ export function Form({ formRes, onFormData }) {
 
   return (
     <>
-      <div className='btn-container'>
+      <div className="btn-container">
         <Logout />
         <HomeButton />
         <EmpDetails />
         <AddDetails />
         <UpdateButton />
-
       </div>
       <div className="container">
         <h3>Create Employee</h3>

@@ -27,7 +27,7 @@ import PrivateRoute from '../../helpers/privateRoutes';
 import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
- max-width: calc(768px + 16px * 2);
+  max-width: calc(768px + 16px * 2);
   margin: 0 auto;
   display: flex;
   min-height: 100%;
@@ -37,21 +37,18 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <AppWrapper>
-    <Switch>
-      <AuthRoute exact path="/sessions" component={SignIn} />
+      <Switch>
+        <AuthRoute exact path="/sessions" component={SignIn} />
 
-      <Route path="/features" component={FeaturePage} />
-     
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/form" component={Form} />
-      <Route path="/details" component={Details} />
-      <Route path="/empedit" component={EmpEdit} />
-      {/* <Route path="" component={NotFoundPage} /> */}
+        <Route path="/features" component={FeaturePage} />
 
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/form" component={Form} />
+        <Route path="/details" component={Details} />
+        <Route path="/empedit" component={EmpEdit} />
+        {/* <Route path="" component={NotFoundPage} /> */}
 
-
-
-      {/* <Route exact path="/sessions" component={SignIn} />
+        {/* <Route exact path="/sessions" component={SignIn} />
        <Route path="/loginpage" component={LoginPage} />
       <Route exact path="/" component={HomePage} />
       <Route path="/features" component={FeaturePage} />
@@ -62,7 +59,7 @@ export default function App() {
       <Route path="/empedit" component={EmpEdit} />
       <Route path="/signin" component={SignIn} />
       <Route path="" component={NotFoundPage} /> */}
-    </Switch>
-     </AppWrapper>
+      </Switch>
+    </AppWrapper>
   );
 }

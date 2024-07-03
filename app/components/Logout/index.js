@@ -28,21 +28,18 @@ function Logout() {
   //  localStorage.removeItem('token');
   //  localStorage.clear();
 
-  const handleChange = () =>{
-    console.log("Clicked on logout")
+  const handleChange = () => {
+    console.log('Clicked on logout');
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.clear();
     browserRedirect('/sessions');
-  
-  }
+  };
   const classes = useStyles();
   return (
-
-      <div className={classes.root}>
-        <Button onClick={handleChange}>Logout</Button>
+    <div className={classes.root}>
+      <Button onClick={handleChange}>Logout</Button>
     </div>
-      
   );
 }
 
